@@ -1,10 +1,6 @@
 import { useState } from 'react';
 import { Box, Button } from '@mui/material';
-import { DroppableZone } from '@app/components/DroppableZone/DroppableZone.tsx';
-import { HTML5Backend } from 'react-dnd-html5-backend'
-import { DndProvider } from 'react-dnd';
-import { Colors } from '@app/components/Colors.ts';
-import { DraggableStyledDot } from '@app/components/DraggableItem/DraggableStyledDot.tsx';
+import { PlayControls } from '@app/components/PlayControls.tsx';
 
 
 interface Step {
@@ -144,14 +140,7 @@ export default function Home() {
       >Reset Game</Button>
     </Box>
 
-    <Box bgcolor={'aqua'}>
-      <DndProvider backend={HTML5Backend}>
-        <DroppableZone/>
-        <DraggableStyledDot color={Colors.RED}/>
-        <DraggableStyledDot color={Colors.GREEN}/>
-      </DndProvider>
-
-    </Box>
+    <PlayControls/>
 
   </>
 }

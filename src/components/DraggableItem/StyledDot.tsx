@@ -1,4 +1,3 @@
-import CircleRoundedIcon from '@mui/icons-material/CircleRounded';
 import { Box } from '@mui/material';
 
 
@@ -10,13 +9,14 @@ export interface Props {
 
 export default function StyledDot({ index, color, opacity }: Props) {
   return (
-    <Box id={index}>
-      <CircleRoundedIcon
-        sx={{color: color}}
-        width={5}
-        height={5}
-        opacity={opacity}
-      />
+    <Box id={index}
+      borderRadius="50%"
+      border={1}
+      width={30}
+      height={30}
+      bgcolor={color}
+      sx={{opacity}}
+    >
     </Box>
   )
 }

@@ -24,9 +24,9 @@ export const DraggableStyledDot = memo(
     const colorDot = useMemo(() => {
       switch (color) {
         case Colors.BLUE:
-          return 'lightblue';
+          return 'blue';
         case Colors.YELLOW:
-          return 'lightgoldenrodyellow';
+          return 'yellow';
         case Colors.WHITE:
           return 'white';
         case Colors.BLACK:

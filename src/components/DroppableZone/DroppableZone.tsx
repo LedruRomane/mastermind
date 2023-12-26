@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react';
+import { memo } from 'react';
 import { DropTargetMonitor, useDrop } from 'react-dnd';
 import StyledDot from '@app/components/DraggableItem/StyledDot.tsx';
 import { Colors } from '@app/components/Colors.ts';
@@ -43,26 +43,24 @@ const TargetBox = memo(
 
     return (
       <Box ref={drop}>
-        <StyledDot color={lastDroppedColor ?? '#fff'} index={lastDroppedColor ?? ''} opacity={
+        <StyledDot color={lastDroppedColor ?? '#a9a9a9'} index={lastDroppedColor ?? ''} opacity={
           isOver ? 0.7 : 1
         }/>
       </Box>
     )
   });
 
-export function DroppableZone() {
-  const [lastDroppedColor, setLastDroppedColor] = useState<string | null>(null)
-  const handleDrop = useCallback(
-    (color: string) => setLastDroppedColor(color),
-    [],
-  )
+interface Props {
+  color: string | null
+  onChangedColor: (color: string) => void
+}
 
-  console.log(lastDroppedColor)
+export function DroppableZone({ color, onChangedColor }: Props) {
 
   return (
     <TargetBox
-      lastDroppedColor={lastDroppedColor as string}
-      onDrop={handleDrop}
+      lastDroppedColor={color as string}
+      onDrop={onChangedColor}
     />
   )
 }
