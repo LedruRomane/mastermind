@@ -1,12 +1,18 @@
 import { useState } from 'react';
 import { Box, Button } from '@mui/material';
+import { DroppableZone } from '@app/components/DroppableZone/DroppableZone.tsx';
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import { DndProvider } from 'react-dnd';
+import { Colors } from '@app/components/Colors.ts';
+import { DraggableStyledDot } from '@app/components/DraggableItem/DraggableStyledDot.tsx';
+
 
 interface Step {
-  playerMove: Array<Colors>
+  playerMove: Array<ColorsCustom>
   responseMove: Array<string>
 }
 
-enum Colors {
+enum ColorsCustom {
   Red = 'Rouge',
   Black = 'Noir',
   Yellow = 'Jaune',
@@ -17,9 +23,9 @@ enum Colors {
 
 export default function Home() {
   const [history, setHistory] = useState<Step[]>([]);
-  const [playerMove, setPlayerMove] = useState<Array<Colors>>([]);
+  const [playerMove, setPlayerMove] = useState<Array<ColorsCustom>>([]);
   const [gameStarted, setGameStarted] = useState<boolean>(false);
-  const combinaisonToFind = [Colors.Black, Colors.Red, Colors.Blue, Colors.Green];
+  const combinaisonToFind = [ColorsCustom.Black, ColorsCustom.Red, ColorsCustom.Blue, ColorsCustom.Green];
 
 
   function resetGame () {
@@ -32,7 +38,7 @@ export default function Home() {
     setGameStarted(true);
   }
 
-  function toggleColorToPlayerMove (color: Colors) {
+  function toggleColorToPlayerMove (color: ColorsCustom) {
     if (playerMove.includes(color)) {
         setPlayerMove(playerMove.filter((c) => c !== color));
         return;
@@ -103,22 +109,22 @@ export default function Home() {
 
       <Box id="interaction">
         <Button id="red" onClick={
-          () => toggleColorToPlayerMove(Colors.Red)
+          () => toggleColorToPlayerMove(ColorsCustom.Red)
         }>Rouge</Button>
         <Button id="black" onClick={
-          () => toggleColorToPlayerMove(Colors.Black)
+          () => toggleColorToPlayerMove(ColorsCustom.Black)
         }>Noir</Button>
         <Button id="yellow" onClick={
-          () => toggleColorToPlayerMove(Colors.Yellow)
+          () => toggleColorToPlayerMove(ColorsCustom.Yellow)
         }>Jaune</Button>
         <Button id="blue" onClick={
-          () => toggleColorToPlayerMove(Colors.Blue)
+          () => toggleColorToPlayerMove(ColorsCustom.Blue)
         }>Bleu</Button>
         <Button id="green" onClick={
-          () => toggleColorToPlayerMove(Colors.Green)
+          () => toggleColorToPlayerMove(ColorsCustom.Green)
         }>Vert</Button>
         <Button id="white" onClick={
-          () => toggleColorToPlayerMove(Colors.White)
+          () => toggleColorToPlayerMove(ColorsCustom.White)
         }>Blanc</Button>
         <Button onClick={resetPlayerMove}>Reset ma combinaison.</Button>
         <Button onClick={() => {
@@ -136,6 +142,15 @@ export default function Home() {
       <Button
         onClick={resetGame}
       >Reset Game</Button>
+    </Box>
+
+    <Box bgcolor={'aqua'}>
+      <DndProvider backend={HTML5Backend}>
+        <DroppableZone/>
+        <DraggableStyledDot color={Colors.RED}/>
+        <DraggableStyledDot color={Colors.GREEN}/>
+      </DndProvider>
+
     </Box>
 
   </>
