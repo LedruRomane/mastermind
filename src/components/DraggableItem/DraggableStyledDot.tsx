@@ -48,7 +48,11 @@ export const DraggableStyledDot = memo(
 
     return <Box ref={drag} role="SourceBox" data-color={color}>
       {DotStyle.colorDot &&
-        <StyledDot index={DotStyle.colorDot} color={DotStyle.colorDot} opacity={DotStyle.opacity}/>
+        <StyledDot
+          color={DotStyle.colorDot}
+          opacity={DotStyle.opacity}
+          radius={30}
+        />
       }
     </Box>
 

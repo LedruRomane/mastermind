@@ -2,20 +2,21 @@ import { Box } from '@mui/material';
 
 
 export interface Props {
-  index: string
   color: string
   opacity?: number
+  radius: number
 }
 
-export default function StyledDot({ index, color, opacity }: Props) {
+export default function StyledDot({ color, opacity, radius }: Props) {
   return (
-    <Box id={index}
+    <Box
       borderRadius="50%"
-      border={1}
-      width={30}
-      height={30}
+      border="0.5px solid grey"
+      width={radius}
+      height={radius}
       bgcolor={color}
       sx={{opacity}}
+      margin="0.8px"
     >
     </Box>
   )

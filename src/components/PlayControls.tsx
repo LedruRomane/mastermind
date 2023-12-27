@@ -5,20 +5,27 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
 import { useState } from 'react';
 
-type ColorsState = [
+export type ColorsState = [
   string | null,
   string | null,
   string | null,
   string | null
 ]
 
-export function PlayControls(){
+interface Props {
+  processPlayerMove: (colors: ColorsState) => void
+}
+
+export function PlayControls({ processPlayerMove }: Props) {
   const [colors, setColors] = useState<ColorsState>([null, null, null, null]);
 
-  return <>
-    <div>PlayControls</div>
+  function resetColors() {
+    setColors([null, null, null, null]);
+  }
+
+  return <Box margin={3}>
     <DndProvider backend={HTML5Backend}>
-      <Box id="droppable-zone" display="flex" flexDirection="row" bgcolor="skyblue" justifyContent="center">
+      <Box id="droppable-zone" display="flex" flexDirection="row" justifyContent="center">
         {colors.map(((color, index) => <DroppableZone key={index} color={color} onChangedColor={
             color => {
               setColors(previousColors => {
@@ -36,15 +43,19 @@ export function PlayControls(){
         <DraggableStyledDot color="yellow" />
         <DraggableStyledDot color="black" />
         <DraggableStyledDot color="white" />
+        <Box id="interact">
+          <Button onClick={() => {
+            processPlayerMove(colors);
+            resetColors();
+          }}>
+            Valider
+          </Button>
+          <Button onClick={resetColors}>
+            Reset
+          </Button>
+        </Box>
       </Box>
-      <Box id="interact">
-        <Button>
-          Valider
-        </Button>
-        <Button>
-          Reset
-        </Button>
-      </Box>
+
     </DndProvider>
-  </>
+  </Box>
 }

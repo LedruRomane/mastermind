@@ -42,10 +42,12 @@ const TargetBox = memo(
     )
 
     return (
-      <Box ref={drop}>
-        <StyledDot color={lastDroppedColor ?? '#a9a9a9'} index={lastDroppedColor ?? ''} opacity={
-          isOver ? 0.7 : 1
-        }/>
+      <Box ref={drop} minHeight={70}>
+        <StyledDot
+          color={lastDroppedColor ?? '#a9a9a9'}
+          opacity={isOver ? 0.7 : 1}
+          radius={30}
+        />
       </Box>
     )
   });
